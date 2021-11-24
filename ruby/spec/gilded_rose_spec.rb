@@ -6,7 +6,7 @@ describe GildedRose do
   #special items = aged brie, sulfuras, backstage passes
   #normal items = +5 vest, elixir
 
-    describe "all items" do
+    describe "all items (except sulfuras)" do
 
       before(:each) do
         min_quality = GildedRose::MIN_QUALITY
@@ -16,8 +16,6 @@ describe GildedRose do
           Item.new(name="+5 Dexterity Vest", sell_in=10, quality=min_quality),
           Item.new(name="Aged Brie", sell_in=2, quality=min_quality),
           Item.new(name="Elixir of the Mongoose", sell_in=5, quality=min_quality),
-          Item.new(name="Sulfuras, Hand of Ragnaros", sell_in=0, quality=min_quality),
-          Item.new(name="Sulfuras, Hand of Ragnaros", sell_in=-1, quality=min_quality),
           Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=min_quality),
           Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=10, quality=min_quality),
           Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=min_quality),
@@ -29,8 +27,6 @@ describe GildedRose do
           Item.new(name="+5 Dexterity Vest", sell_in=10, quality=max_quality),
           Item.new(name="Aged Brie", sell_in=2, quality=max_quality),
           Item.new(name="Elixir of the Mongoose", sell_in=5, quality=max_quality),
-          Item.new(name="Sulfuras, Hand of Ragnaros", sell_in=0, quality=max_quality),
-          Item.new(name="Sulfuras, Hand of Ragnaros", sell_in=-1, quality=max_quality),
           Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=max_quality),
           Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=10, quality=max_quality),
           Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=max_quality),
