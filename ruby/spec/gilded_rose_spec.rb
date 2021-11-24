@@ -16,8 +16,6 @@ describe GildedRose do
           Item.new(name="Aged Brie", sell_in=2, quality=min_quality),
           Item.new(name="Elixir of the Mongoose", sell_in=5, quality=min_quality),
           Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=min_quality),
-          Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=10, quality=min_quality),
-          Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=min_quality),
           # This Conjured item does not work properly yet
           # Item.new(name="Conjured Mana Cake", sell_in=3, quality=6), # <-- :O
         ]
@@ -27,8 +25,6 @@ describe GildedRose do
           Item.new(name="Aged Brie", sell_in=2, quality=max_quality),
           Item.new(name="Elixir of the Mongoose", sell_in=5, quality=max_quality),
           Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=max_quality),
-          Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=10, quality=max_quality),
-          Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=max_quality),
           # This Conjured item does not work properly yet
           # Item.new(name="Conjured Mana Cake", sell_in=3, quality=6), # <-- :O
         ]
@@ -99,4 +95,11 @@ describe GildedRose do
     end
   end
 
+  describe 'just for simplecov 100%' do
+    it 'formats correctly' do
+      item = Item.new(name="+5 Dexterity Vest", sell_in=-1, quality=20)
+
+      expect(item.to_s).to eq "+5 Dexterity Vest, -1, 20"
+    end
+  end
 end
