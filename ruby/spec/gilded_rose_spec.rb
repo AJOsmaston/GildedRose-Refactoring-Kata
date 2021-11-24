@@ -52,6 +52,14 @@ describe GildedRose do
       end
     end
 
+    describe "Sufuras" do
+      it 'quality never changes' do
+        items = [Item.new(name="Sulfuras, Hand of Ragnaros", sell_in=0, quality=80)]
+        GildedRose.new(items).update_quality()
+        expect(items[0].quality).to eq 80
+      end
+    end
+
     describe "normal items" do
       it "reduces quality by 1" do
         items = [Item.new(name="+5 Dexterity Vest", sell_in=10, quality=20)]
