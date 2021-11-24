@@ -5,6 +5,8 @@ class GildedRose
   end
 
   def update_quality()
+    #currently, this method both updates the quality and updates the sell_in value
+
     #iterate through the given items array, each item at a time
     @items.each do |item|
       #ITEM QUALITY CHANGES

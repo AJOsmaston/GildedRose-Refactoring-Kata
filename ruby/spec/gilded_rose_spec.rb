@@ -3,10 +3,16 @@ require './lib/gilded_rose'
 describe GildedRose do
 
   describe "#update_quality" do
-    it "does not change the name" do
-      items = [Item.new("foo", 0, 0)]
-      GildedRose.new(items).update_quality()
-      expect(items[0].name).to eq "foo"
+  #special items = aged brie, sulfuras, backstage passes
+  #normal items = +5 vest, elixir
+
+    describe "normal items reduce quality and sell_in date" do
+      it "reduces quality by 1" do
+        items = [Item.new(name="+5 Dexterity Vest", sell_in=10, quality=20)]
+        GildedRose.new(items).update_quality()
+
+        expect(items[0].quality).to eq 19
+      end
     end
   end
 
