@@ -20,7 +20,7 @@ class GildedRose
           end
 
         elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
-          manage_ticket(item)
+          manage_passes(item)
         elsif item.quality > 0
           decrease_quality_by_one(item)
           if item.sell_in < 0
@@ -31,11 +31,11 @@ class GildedRose
     end
   end
 
-  def manage_ticket(item)
+  def manage_passes(item)
     increase_quality_by_one(item)
     check_for_10_days(item)
     check_for_6_days(item)
-    expired_ticket?(item)
+    expired_pass?(item)
   end
 
   def check_for_10_days(item)
@@ -50,7 +50,7 @@ class GildedRose
     end
   end
 
-  def expired_ticket?(item)
+  def expired_pass?(item)
     if item.sell_in < 0
       item.quality = item.quality - item.quality
     end
