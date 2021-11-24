@@ -17,11 +17,8 @@ class GildedRose
         if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
           #stops item quality from being reduced past 0
           if item.quality > 0
-            #stops item quality from being reduced if legendary item
-            if item.name != "Sulfuras, Hand of Ragnaros"
-              #reduce quality by 1
-              item.quality = item.quality - 1
-            end
+            #reduce quality by 1
+            item.quality = item.quality - 1
           end
         #if it is Aged Brie or Backstage passes
         else
@@ -43,11 +40,8 @@ class GildedRose
         end
 
         #ITEM SELL_IN CHANGES
-        #first check for the legendary item
-        if item.name != "Sulfuras, Hand of Ragnaros"
-          #If not the legendary item, reduce by 1
-          item.sell_in = item.sell_in - 1
-        end
+        #reduce sell_in by 1
+        item.sell_in = item.sell_in - 1
 
         #check if item sell_in is below 0
         if item.sell_in < 0
@@ -55,11 +49,7 @@ class GildedRose
           if item.name != "Aged Brie"
             #check if item is not backstage passes
             if item.name != "Backstage passes to a TAFKAL80ETC concert"
-              #check if item is not the legendary
-              if item.name != "Sulfuras, Hand of Ragnaros"
-                #reduce item quality by 1
-                item.quality = item.quality - 1
-              end
+              item.quality = item.quality - 1
             else
               #reset item quality of backstage passes to 0 on day of concert
               item.quality = item.quality - item.quality
