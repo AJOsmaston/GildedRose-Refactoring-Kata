@@ -6,7 +6,7 @@ describe GildedRose do
   #special items = aged brie, sulfuras, backstage passes
   #normal items = +5 vest, elixir
 
-    describe "normal items reduce quality and sell_in date" do
+    describe "normal items" do
       it "reduces quality by 1" do
         items = [Item.new(name="+5 Dexterity Vest", sell_in=10, quality=20)]
         GildedRose.new(items).update_quality()
@@ -19,6 +19,13 @@ describe GildedRose do
         GildedRose.new(items).update_quality()
 
         expect(items[0].sell_in).to eq 9
+      end
+
+      it "reduces quality by 2 once sell_in < 1" do
+        items = [Item.new(name="+5 Dexterity Vest", sell_in=-1, quality=20)]
+        GildedRose.new(items).update_quality()
+
+        expect(items[0].quality).to eq 18
       end
     end
   end
