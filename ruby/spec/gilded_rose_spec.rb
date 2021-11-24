@@ -7,7 +7,6 @@ describe GildedRose do
   #normal items = +5 vest, elixir
 
     describe "all items (except sulfuras)" do
-
       before(:each) do
         min_quality = GildedRose::MIN_QUALITY
         max_quality = GildedRose::MAX_QUALITY
@@ -65,6 +64,14 @@ describe GildedRose do
         items = [Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=0, quality=49)]
         GildedRose.new(items).update_quality()
         expect(items[0].quality).to eq 0
+      end
+    end
+
+    describe "Aged Brie" do
+      it "increase in quality faster past sell_in date" do
+        items = [Item.new(name="Aged Brie", sell_in=-1, quality=0)]
+        GildedRose.new(items).update_quality()
+        expect(items[0].quality).to eq 2
       end
     end
 
