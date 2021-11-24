@@ -9,15 +9,18 @@ class GildedRose
   def update_quality()
     @items.each do |item|
       if within_acceptable_quality?(item)
-        decrease_sell_in_by_one(item)  
-        if item.name == "Aged Brie"
+        decrease_sell_in_by_one(item) 
+        case item.name
+        when "Aged Brie"
           manage_brie(item)
-        elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
+        when "Backstage passes to a TAFKAL80ETC concert"
           manage_passes(item)
-        elsif item.quality > 0
-          decrease_quality_by_one(item)
-          if passed_expiry_date?(item)
+        else
+          if item.quality > 0
             decrease_quality_by_one(item)
+            if passed_expiry_date?(item)
+              decrease_quality_by_one(item)
+            end
           end
         end
       end
