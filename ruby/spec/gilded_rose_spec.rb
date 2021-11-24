@@ -108,7 +108,7 @@ describe GildedRose do
         expect(items[0].sell_in).to eq 9
       end
 
-      it "reduces quality by 2 once sell_in < 1" do
+      it "reduces quality by 2 once sell_in < 0" do
         items = [Item.new(name="+5 Dexterity Vest", sell_in=-1, quality=20)]
         GildedRose.new(items).update_quality()
 
