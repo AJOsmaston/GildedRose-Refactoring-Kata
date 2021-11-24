@@ -60,6 +60,14 @@ describe GildedRose do
       end
     end
 
+    describe "Backstage passes" do
+      it "resets quality after sell_in date" do
+        items = [Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=0, quality=49)]
+        GildedRose.new(items).update_quality()
+        expect(items[0].quality).to eq 0
+      end
+    end
+
     describe "normal items" do
       it "reduces quality by 1" do
         items = [Item.new(name="+5 Dexterity Vest", sell_in=10, quality=20)]
