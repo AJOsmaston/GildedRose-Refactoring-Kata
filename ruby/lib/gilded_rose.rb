@@ -7,28 +7,32 @@ class GildedRose
   end
 
   def update_quality()
-    #currently, this method both updates the quality and updates the sell_in value
-
-    #iterate through the given items array, each item at a time
     @items.each do |item|
       if within_acceptable_quality?(item)
-        decrease_sell_in_by_one(item)
+        decrease_sell_in_by_one(item)  
         if item.name == "Aged Brie"
-          increase_quality_by_one(item)
-          if item.sell_in < 0
-            increase_quality_by_one(item)
-          end
-
+          manage_brie(item)
         elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
           manage_passes(item)
         elsif item.quality > 0
           decrease_quality_by_one(item)
-          if item.sell_in < 0
+          if passed_expiry_date?(item)
             decrease_quality_by_one(item)
           end
         end
       end
     end
+  end
+
+  def manage_brie(item)
+    increase_quality_by_one(item)
+    if passed_expiry_date?(item)
+      increase_quality_by_one(item)
+    end
+  end
+
+  def passed_expiry_date?(item)
+    item.sell_in < 0
   end
 
   def manage_passes(item)
@@ -51,7 +55,7 @@ class GildedRose
   end
 
   def expired_pass?(item)
-    if item.sell_in < 0
+    if passed_expiry_date?(item)
       item.quality = item.quality - item.quality
     end
   end
