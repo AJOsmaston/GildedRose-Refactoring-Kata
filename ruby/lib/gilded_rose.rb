@@ -10,20 +10,19 @@ class GildedRose
     @items.each do |item|
       if within_acceptable_quality?(item)
         decrease_sell_in_by_one(item) 
-        case item.name
-        when "Aged Brie"
-          manage_brie(item)
-        when "Backstage passes to a TAFKAL80ETC concert"
-          manage_passes(item)
-        else
-          if item.quality > 0
-            decrease_quality_by_one(item)
-            if passed_expiry_date?(item)
-              decrease_quality_by_one(item)
-            end
-          end
-        end
+        check_individual(item)
       end
+    end
+  end
+
+  def check_individual(item)
+    case item.name
+    when "Aged Brie"
+      manage_brie(item)
+    when "Backstage passes to a TAFKAL80ETC concert"
+      manage_passes(item)
+    else
+      manage_other(item)
     end
   end
 
@@ -60,6 +59,15 @@ class GildedRose
   def expired_pass?(item)
     if passed_expiry_date?(item)
       item.quality = item.quality - item.quality
+    end
+  end
+
+  def manage_other(item)
+    if item.quality > 0
+      decrease_quality_by_one(item)
+      if passed_expiry_date?(item)
+        decrease_quality_by_one(item)
+      end
     end
   end
 
