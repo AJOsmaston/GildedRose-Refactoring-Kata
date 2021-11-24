@@ -12,35 +12,20 @@ class GildedRose
     #iterate through the given items array, each item at a time
     @items.each do |item|
       if item.quality >= MIN_QUALITY && item.quality < MAX_QUALITY
-        #ITEM QUALITY CHANGES
-        #first a check is run for if the item is not aged brie or backstage passes
-        if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
-          #stops item quality from being reduced past 0
-          if item.quality > 0
-            #reduce quality by 1
-            item.quality = item.quality - 1
+        if item.name == "Aged Brie"
+          increase_quality_by_one(item)
+        elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
+          increase_quality_by_one(item)
+          if item.sell_in < 11
+            increase_quality_by_one(item)
           end
-        #if it is Aged Brie or Backstage passes
-        else
-          #increase item quality if not max
-          item.quality = item.quality + 1
-          #if item is the concert ticket
-          if item.name == "Backstage passes to a TAFKAL80ETC concert"
-            #if the concert ticket is less than 11 days
-            if item.sell_in < 11
-              #increase by 1 (2 total)
-              item.quality = item.quality + 1
-            end
-            #if the concert ticket is less than 6 days
-            if item.sell_in < 6
-              #increases quality by 1 again (3 total)
-              item.quality = item.quality + 1
-            end
+          if item.sell_in < 6
+            increase_quality_by_one(item)
           end
+        elsif item.quality != 0
+          decrease_quality_by_one(item)
         end
 
-        #ITEM SELL_IN CHANGES
-        #reduce sell_in by 1
         item.sell_in = item.sell_in - 1
 
         #check if item sell_in is below 0
@@ -62,6 +47,14 @@ class GildedRose
         end
       end
     end
+  end
+
+  def increase_quality_by_one(item)
+    item.quality = item.quality + 1
+  end
+
+  def decrease_quality_by_one(item)
+    item.quality = item.quality - 1
   end
 end
 
