@@ -63,6 +63,13 @@ describe GildedRose do
         expect(items[0].quality).to eq 12
       end
 
+      it "quality increases by 3 when 5 days or less to sell_in" do
+        items = [Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=10)]
+        GildedRose.new(items).update_quality()
+
+        expect(items[0].quality).to eq 13
+      end
+
       it "resets quality after sell_in date" do
         items = [Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=0, quality=49)]
         GildedRose.new(items).update_quality()
