@@ -101,6 +101,13 @@ describe GildedRose do
   
           expect(items[0].quality).to eq 4
         end
+
+        it "reduces quality by 4 when below 0 sell_in" do
+          items = [Item.new(name="Conjured Mana Cake", sell_in=-1, quality=6)]
+          GildedRose.new(items).update_quality()
+  
+          expect(items[0].quality).to eq 2
+        end
       end
     end
 

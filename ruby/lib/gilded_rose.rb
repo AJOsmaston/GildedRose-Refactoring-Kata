@@ -32,6 +32,10 @@ class GildedRose
     when "Conjured Mana Cake"
       decrease_quality_by_one(item)
       decrease_quality_by_one(item)
+      if passed_expiry_date?(item)
+        decrease_quality_by_one(item)
+        decrease_quality_by_one(item)
+      end
     else
       manage_other(item)
     end
