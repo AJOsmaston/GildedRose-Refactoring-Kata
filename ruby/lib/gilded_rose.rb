@@ -60,7 +60,7 @@ class GildedRose
   def manage_other(item)
     check_for_quality_and_decrease_by_one(item)
     if passed_expiry_date?(item)
-      decrease_quality_by_one(item)
+      check_for_quality_and_decrease_by_one(item)
     end
   end
 
