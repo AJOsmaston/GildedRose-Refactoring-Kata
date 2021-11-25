@@ -30,11 +30,17 @@ class GildedRose
     when "Backstage passes to a TAFKAL80ETC concert"
       manage_passes(item)
     when "Conjured Mana Cake"
-      decrease_quality_by_one(item)
-      decrease_quality_by_one(item)
-      if passed_expiry_date?(item)
+      if item.quality > 0
         decrease_quality_by_one(item)
+      end
+      if item.quality > 0
         decrease_quality_by_one(item)
+      end
+      if passed_expiry_date?(item) && item.quality > 0
+        decrease_quality_by_one(item)
+        if item.quality > 0
+          decrease_quality_by_one(item)
+        end
       end
     else
       manage_other(item)

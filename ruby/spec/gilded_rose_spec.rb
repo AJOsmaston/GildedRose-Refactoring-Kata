@@ -16,8 +16,7 @@ describe GildedRose do
           Item.new(name="Aged Brie", sell_in=2, quality=min_quality),
           Item.new(name="Elixir of the Mongoose", sell_in=5, quality=min_quality),
           Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=min_quality),
-          # This Conjured item does not work properly yet
-          # Item.new(name="Conjured Mana Cake", sell_in=3, quality=6), # <-- :O
+          Item.new(name="Conjured Mana Cake", sell_in=3, quality=min_quality)
         ]
 
         @items_qual_MAX = [
@@ -25,8 +24,7 @@ describe GildedRose do
           Item.new(name="Aged Brie", sell_in=2, quality=max_quality),
           Item.new(name="Elixir of the Mongoose", sell_in=5, quality=max_quality),
           Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=max_quality),
-          # This Conjured item does not work properly yet
-          # Item.new(name="Conjured Mana Cake", sell_in=3, quality=6), # <-- :O
+          Item.new(name="Conjured Mana Cake", sell_in=3, quality=max_quality)
         ]
       end
 
