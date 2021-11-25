@@ -39,7 +39,7 @@ class GildedRose
   def manage_brie(item)
     increase_quality_by_one(item)
     if passed_expiry_date?(item)
-      increase_quality_by_one(item)
+      check_for_max_quality_and_increase_by_one(item)
     end
   end
 

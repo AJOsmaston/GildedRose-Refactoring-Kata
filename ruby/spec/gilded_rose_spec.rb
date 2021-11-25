@@ -107,6 +107,20 @@ describe GildedRose do
         GildedRose.new(items).update_quality()
         expect(items[0].quality).to eq 2
       end
+
+      describe "quality edge cases" do
+        it "doesn't increase past 50 when sell_in greater than 0" do
+          items = [Item.new(name="Aged Brie", sell_in=10, quality=49)]
+          GildedRose.new(items).update_quality()
+          expect(items[0].quality).to be <= 50
+        end
+
+        it "doesn't increase past 50 when sell_in less than 0" do
+          items = [Item.new(name="Aged Brie", sell_in=-1, quality=49)]
+          GildedRose.new(items).update_quality()
+          expect(items[0].quality).to be <= 50
+        end
+      end
     end
 
     describe "conjured items" do
