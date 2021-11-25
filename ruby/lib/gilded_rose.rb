@@ -38,9 +38,8 @@ class GildedRose
 
   def manage_brie(item)
     check_for_max_quality_and_increase_by_one(item)
-    if passed_expiry_date?(item)
-      check_for_max_quality_and_increase_by_one(item)
-    end
+    return unless passed_expiry_date?(item)
+    check_for_max_quality_and_increase_by_one(item)
   end
 
   def manage_passes(item)
@@ -52,44 +51,38 @@ class GildedRose
 
   def manage_conjured(item)
     check_for_quality_and_decrease_by_two(item)
-    if passed_expiry_date?(item)
-      check_for_quality_and_decrease_by_two(item)
-    end
+    return unless passed_expiry_date?(item)
+    check_for_quality_and_decrease_by_two(item)
   end
 
   def manage_other(item)
     check_for_quality_and_decrease_by_one(item)
-    if passed_expiry_date?(item)
-      check_for_quality_and_decrease_by_one(item)
-    end
+    return unless passed_expiry_date?(item)
+    check_for_quality_and_decrease_by_one(item)
   end
 
   def check_for_max_quality_and_increase_by_one(item)
-    if item.quality < MAX_QUALITY
-      increase_quality_by_one(item)
-    end
+    return unless item.quality < MAX_QUALITY
+    increase_quality_by_one(item)
   end
 
   def passed_expiry_date?(item)
-    item.sell_in < 0
+    item.sell_in.negative?
   end
 
   def check_for_10_days(item)
-    if item.sell_in < 11
-      check_for_max_quality_and_increase_by_one(item)
-    end
+    return unless item.sell_in < 11
+    check_for_max_quality_and_increase_by_one(item)
   end
 
   def check_for_6_days(item)
-    if item.sell_in < 6
-      check_for_max_quality_and_increase_by_one(item)
-    end
+    return unless item.sell_in < 6
+    check_for_max_quality_and_increase_by_one(item)
   end
 
   def expired_pass?(item)
-    if passed_expiry_date?(item)
-      item.quality = item.quality - item.quality
-    end
+    return unless passed_expiry_date?(item)
+    item.quality -= item.quality
   end
 
   def check_for_quality_and_decrease_by_two(item)
@@ -98,17 +91,16 @@ class GildedRose
   end
 
   def increase_quality_by_one(item)
-    item.quality = item.quality + 1
+    item.quality += 1
   end
 
   def check_for_quality_and_decrease_by_one(item)
-    if item.quality > MIN_QUALITY
-      decrease_quality_by_one(item)
-    end
+    return unless item.quality > MIN_QUALITY
+    decrease_quality_by_one(item)
   end
 
   def decrease_quality_by_one(item)
-    item.quality = item.quality - 1
+    item.quality -= 1
   end
 end
 

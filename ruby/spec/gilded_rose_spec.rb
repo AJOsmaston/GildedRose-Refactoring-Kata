@@ -11,7 +11,7 @@ describe GildedRose do
         min_quality = GildedRose::MIN_QUALITY
         max_quality = GildedRose::MAX_QUALITY
 
-        @items_qual_MIN = [
+        @items_qual_min = [
           Item.new(name = "+5 Dexterity Vest", sell_in = 10, quality = min_quality),
           Item.new(name = "Aged Brie", sell_in = 2, quality = min_quality),
           Item.new(name = "Elixir of the Mongoose", sell_in = 5, quality = min_quality),
@@ -19,7 +19,7 @@ describe GildedRose do
           Item.new(name = "Conjured Mana Cake", sell_in = 3, quality = min_quality)
         ]
 
-        @items_qual_MAX = [
+        @items_qual_max = [
           Item.new(name = "+5 Dexterity Vest", sell_in = 10, quality = max_quality),
           Item.new(name = "Aged Brie", sell_in = 2, quality = max_quality),
           Item.new(name = "Elixir of the Mongoose", sell_in = 5, quality = max_quality),
@@ -29,17 +29,17 @@ describe GildedRose do
       end
 
       it "quality is never negative" do
-        GildedRose.new(@items_qual_MIN).update_quality()
+        GildedRose.new(@items_qual_min).update_quality()
 
-        @items_qual_MIN.each do |item| 
+        @items_qual_min.each do |item| 
           expect(item.quality).to be >= 0
         end
       end
 
       it "quality is never more than 50" do
-        GildedRose.new(@items_qual_MAX).update_quality()
+        GildedRose.new(@items_qual_max).update_quality()
 
-        @items_qual_MAX.each do |item| 
+        @items_qual_max.each do |item| 
           expect(item.quality).to be <= 50
         end
       end
