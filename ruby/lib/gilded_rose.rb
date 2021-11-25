@@ -74,9 +74,13 @@ class GildedRose
 
   def check_for_10_days(item)
     if item.sell_in < 11
-      if item.quality < MAX_QUALITY
-        increase_quality_by_one(item)
-      end
+      check_for_max_quality_and_increase_by_one(item)
+    end
+  end
+
+  def check_for_max_quality_and_increase_by_one(item)
+    if item.quality < MAX_QUALITY
+      increase_quality_by_one(item)
     end
   end
 
