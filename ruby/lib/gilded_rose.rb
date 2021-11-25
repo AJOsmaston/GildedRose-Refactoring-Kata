@@ -51,26 +51,27 @@ class GildedRose
   end
 
   def manage_conjured(item)
-    if item.quality > 0
-      decrease_quality_by_one(item)
-    end
-    if item.quality > 0
-      decrease_quality_by_one(item)
-    end
-    if passed_expiry_date?(item) && item.quality > 0
-      decrease_quality_by_one(item)
-      if item.quality > 0
-        decrease_quality_by_one(item)
-      end
+    check_for_quality_and_decrease_by_two(item)
+    if passed_expiry_date?(item)
+      check_for_quality_and_decrease_by_two(item)
     end
   end
 
-  def manage_other(item)
+  def check_for_quality_and_decrease_by_one(item)
     if item.quality > 0
       decrease_quality_by_one(item)
-      if passed_expiry_date?(item)
-        decrease_quality_by_one(item)
-      end
+    end
+  end
+
+  def check_for_quality_and_decrease_by_two(item)
+    check_for_quality_and_decrease_by_one(item)
+    check_for_quality_and_decrease_by_one(item)
+  end
+
+  def manage_other(item)
+    check_for_quality_and_decrease_by_one(item)
+    if passed_expiry_date?(item)
+      decrease_quality_by_one(item)
     end
   end
 
