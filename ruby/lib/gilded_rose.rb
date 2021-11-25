@@ -30,18 +30,7 @@ class GildedRose
     when "Backstage passes to a TAFKAL80ETC concert"
       manage_passes(item)
     when "Conjured Mana Cake"
-      if item.quality > 0
-        decrease_quality_by_one(item)
-      end
-      if item.quality > 0
-        decrease_quality_by_one(item)
-      end
-      if passed_expiry_date?(item) && item.quality > 0
-        decrease_quality_by_one(item)
-        if item.quality > 0
-          decrease_quality_by_one(item)
-        end
-      end
+      manage_conjured(item)
     else
       manage_other(item)
     end
@@ -59,6 +48,21 @@ class GildedRose
     check_for_10_days(item)
     check_for_6_days(item)
     expired_pass?(item)
+  end
+
+  def manage_conjured(item)
+    if item.quality > 0
+      decrease_quality_by_one(item)
+    end
+    if item.quality > 0
+      decrease_quality_by_one(item)
+    end
+    if passed_expiry_date?(item) && item.quality > 0
+      decrease_quality_by_one(item)
+      if item.quality > 0
+        decrease_quality_by_one(item)
+      end
+    end
   end
 
   def manage_other(item)
