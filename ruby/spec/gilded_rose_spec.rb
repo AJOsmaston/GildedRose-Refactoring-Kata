@@ -104,6 +104,14 @@ describe GildedRose do
     
             expect(items[0].sell_in).to be < 10
           end
+
+          it "continues to count down sell_in with max quality (5 days)" do
+            items = [Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=50)]
+            GildedRose.new(items).update_quality()
+    
+            expect(items[0].sell_in).to be < 5
+          end
+        end
       end
     end
 
