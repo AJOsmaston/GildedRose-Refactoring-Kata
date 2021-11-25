@@ -6,7 +6,7 @@ class GildedRose
     @items = items
   end
 
-  def update_quality()
+  def update_quality
     @items.each do |item|
       if within_acceptable_quality?(item)
         decrease_sell_in_by_one(item) 
@@ -64,8 +64,10 @@ class GildedRose
     end
   end
 
-  def increase_quality_by_one(item)
-    item.quality = item.quality + 1
+  def check_for_max_quality_and_increase_by_one(item)
+    if item.quality < MAX_QUALITY
+      increase_quality_by_one(item)
+    end
   end
 
   def passed_expiry_date?(item)
@@ -75,12 +77,6 @@ class GildedRose
   def check_for_10_days(item)
     if item.sell_in < 11
       check_for_max_quality_and_increase_by_one(item)
-    end
-  end
-
-  def check_for_max_quality_and_increase_by_one(item)
-    if item.quality < MAX_QUALITY
-      increase_quality_by_one(item)
     end
   end
 
@@ -96,14 +92,17 @@ class GildedRose
     end
   end
 
-
   def check_for_quality_and_decrease_by_two(item)
     check_for_quality_and_decrease_by_one(item)
     check_for_quality_and_decrease_by_one(item)
   end
 
+  def increase_quality_by_one(item)
+    item.quality = item.quality + 1
+  end
+
   def check_for_quality_and_decrease_by_one(item)
-    if item.quality > 0
+    if item.quality > MIN_QUALITY
       decrease_quality_by_one(item)
     end
   end
