@@ -16,7 +16,7 @@ class GildedRose
   end
 
   def within_acceptable_quality?(item)
-    item.quality >= MIN_QUALITY && item.quality < MAX_QUALITY
+    item.quality >= MIN_QUALITY && item.quality <= MAX_QUALITY
   end
 
   def decrease_sell_in_by_one(item)
@@ -37,14 +37,14 @@ class GildedRose
   end
 
   def manage_brie(item)
-    increase_quality_by_one(item)
+    check_for_max_quality_and_increase_by_one(item)
     if passed_expiry_date?(item)
       check_for_max_quality_and_increase_by_one(item)
     end
   end
 
   def manage_passes(item)
-    increase_quality_by_one(item)
+    check_for_max_quality_and_increase_by_one(item)
     check_for_10_days(item)
     check_for_6_days(item)
     expired_pass?(item)
