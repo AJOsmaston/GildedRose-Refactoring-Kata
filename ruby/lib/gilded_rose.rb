@@ -29,6 +29,9 @@ class GildedRose
       manage_brie(item)
     when "Backstage passes to a TAFKAL80ETC concert"
       manage_passes(item)
+    when "Conjured Mana Cake"
+      decrease_quality_by_one(item)
+      decrease_quality_by_one(item)
     else
       manage_other(item)
     end
