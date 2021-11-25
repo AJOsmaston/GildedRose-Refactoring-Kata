@@ -81,6 +81,17 @@ describe GildedRose do
         GildedRose.new(items).update_quality()
         expect(items[0].quality).to eq 0
       end
+
+      describe "quality edge cases" do
+        describe "doesn't go above the max quality" do
+          it "gets capped at 50 with sell_in 10 days left" do
+            items = [Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=10, quality=49)]
+            GildedRose.new(items).update_quality()
+    
+            expect(items[0].quality).to be <= 50
+          end
+        end
+      end
     end
 
     describe "Aged Brie" do
