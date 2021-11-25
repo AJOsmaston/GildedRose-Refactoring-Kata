@@ -57,17 +57,6 @@ class GildedRose
     end
   end
 
-  def check_for_quality_and_decrease_by_one(item)
-    if item.quality > 0
-      decrease_quality_by_one(item)
-    end
-  end
-
-  def check_for_quality_and_decrease_by_two(item)
-    check_for_quality_and_decrease_by_one(item)
-    check_for_quality_and_decrease_by_one(item)
-  end
-
   def manage_other(item)
     check_for_quality_and_decrease_by_one(item)
     if passed_expiry_date?(item)
@@ -98,6 +87,18 @@ class GildedRose
   def expired_pass?(item)
     if passed_expiry_date?(item)
       item.quality = item.quality - item.quality
+    end
+  end
+
+
+  def check_for_quality_and_decrease_by_two(item)
+    check_for_quality_and_decrease_by_one(item)
+    check_for_quality_and_decrease_by_one(item)
+  end
+
+  def check_for_quality_and_decrease_by_one(item)
+    if item.quality > 0
+      decrease_quality_by_one(item)
     end
   end
 
