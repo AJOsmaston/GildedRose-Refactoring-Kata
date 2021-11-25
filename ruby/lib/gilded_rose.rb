@@ -86,7 +86,7 @@ class GildedRose
 
   def check_for_6_days(item)
     if item.sell_in < 6
-      increase_quality_by_one(item)
+      check_for_max_quality_and_increase_by_one(item)
     end
   end
 
